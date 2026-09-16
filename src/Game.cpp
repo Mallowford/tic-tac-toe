@@ -3,13 +3,14 @@
 Piece Game::whoWon() const {
     // Check win patterns
     // Return piece that is in the pattern
+    return None;
 };
 
 bool Game::hasFinished() const {
     // Check Win Conditions
 
     // Check if board is full
-
+    return false;
 };
 
 Game::Game(int size) {
@@ -23,7 +24,7 @@ Game::Game(int size) {
 };
 
 void Game::clean() {
-    int size = board.size() - 1;
+    int size = board.size();
 
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
@@ -33,7 +34,7 @@ void Game::clean() {
 };
 
 void Game::printBoard() const {
-    int size = board.size() - 1;
+    int size = board.size();
 
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
@@ -53,6 +54,13 @@ void Game::printBoard() const {
 };
 
 bool Game::place(int row, int col) {
+    if (row < 0 || row > board.size()) {
+        return false;
+    };
+    if (col < 0 || col > board.size()) {
+        return false;
+    };
+    
     // Check if there's already a piece at location
     if (board.at(row).at(col) != None) {
         return false;
@@ -67,4 +75,6 @@ bool Game::place(int row, int col) {
     else {
         this->currTurn = Cross;
     };
+
+    return true;
 };
