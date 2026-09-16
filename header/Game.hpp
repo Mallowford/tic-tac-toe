@@ -1,5 +1,6 @@
 #pragma
 #include <vector>
+#include <iostream>
 
 enum Piece {
     None = 0,
@@ -10,11 +11,14 @@ enum Piece {
 class Game {
     private:
         std::vector<std::vector<Piece>> board;
+        Piece currTurn = Cross;
     public:
         Game(int size = 3);
 
-        void Place(int row, int col);
-        bool CheckWin() const;
-        Piece checkWinner() const;
+        bool hasFinished() const;
+        Piece whoWon() const;
 
+        void clean();
+        bool place(int row, int col);
+        void printBoard() const;
 };
