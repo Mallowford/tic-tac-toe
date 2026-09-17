@@ -12,10 +12,11 @@ class Game {
     private:
         std::vector<std::vector<Piece>> board;
         Piece currTurn = Cross;
+        Piece winnerPiece = None;
     public:
         Game(int size = 3);
 
-        bool hasFinished() const;
+        bool hasFinished();
         Piece whoWon() const;
 
         void clean();

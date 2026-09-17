@@ -3,7 +3,7 @@
 int main() {
     Game engine;
 
-    bool restart = false;
+    bool restart = true;
 
     do {
         bool validInput = false;
@@ -31,7 +31,8 @@ int main() {
         validInput = false;
 
         if (engine.hasFinished()) {
-            // Print out winner
+            engine.printBoard();
+
             Piece winner = engine.whoWon();
             if (winner == Cross) {
                 std::cout << "Cross wins\n";
@@ -48,22 +49,24 @@ int main() {
                 std::cout << "Restart? (y/n): ";
                 char input;
                 std::cin >> input;
+                std::cout << "\n";
                 if (tolower(input) == 'y') {
+                    restart = true;
+                    validInput = true;
+                    engine.clean();
+                }
+                else if (tolower(input) == 'n') {
                     restart = false;
                     validInput = true;
                 }
-                else if (tolower(input) == 'n') {
-                    restart = true;
-                    validInput = true;
-                }
                 else {
-                    std::cout << "invalid input";
+                    std::cout << "invalid input, please try again\n";
                 };
             } while(!validInput);
  
         };
 
-    } while (!restart && !engine.hasFinished());
+    } while (restart && !engine.hasFinished());
 
     return 0;
 };
